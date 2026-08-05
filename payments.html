@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payments</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header class="navbar">
+
+<div class="logo-text">
+🏥 Hospital System
+</div>
+
+<ul class="nav-links">
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="appointments.html">Appointments</a></li>
+<li><a href="ambulance.html">Ambulance</a></li>
+<li><a href="medical.html">Medical Records</a></li>
+<li><a href="payments.html">Payments</a></li>
+<li><a href="index.html">Logout</a></li>
+</ul>
+
+</header>
+
+<div class="dashboard">
+
+<h1>💳 Bills & Payments</h1>
+
+<div class="card-container">
+
+<div class="card">
+
+<h2>Outstanding Bill</h2>
+
+<h1 style="color:red;">650 ETB</h1>
+
+<p>Consultation Fee</p>
+
+<button onclick="payNow()">
+
+Pay Now
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Payment History</h2>
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr>
+<th>Date</th>
+<th>Amount</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>01 Aug</td>
+<td>300 ETB</td>
+<td style="color:green;">Paid</td>
+</tr>
+
+<tr>
+<td>15 Jul</td>
+<td>500 ETB</td>
+<td style="color:green;">Paid</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Payment Methods</h2>
+
+<p>✅ Cash</p>
+
+<p>✅ Telebirr</p>
+
+<p>✅ Bank Transfer</p>
+
+<p>✅ Credit Card</p>
+
+</div>
+
+<div class="card">
+
+<h2>Receipt</h2>
+
+<p>Your latest receipt is available.</p>
+
+<button onclick="downloadReceipt()">
+
+Download Receipt
+
+</button>
+
+</div>
+
+</div>
+
+<div id="paymentResult"></div>
+
+</div>
+
+<script>
+
+function payNow(){
+
+document.getElementById("paymentResult").innerHTML=`
+
+<div style="margin-top:30px;
+background:#d1e7dd;
+padding:20px;
+border-radius:10px;">
+
+<h2 style="color:green;">
+✅ Payment Successful
+</h2>
+
+<p>Amount Paid: <b>650 ETB</b></p>
+
+<p>Reference: HMS2026001</p>
+
+</div>
+
+`;
+
+}
+
+function downloadReceipt(){
+
+alert("Receipt downloaded successfully! (Demo)");
+
+}
+
+</script>
+
+</body>
+</html>

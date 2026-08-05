@@ -1,0 +1,305 @@
+/* ===========================
+   Hospital Management System
+   style.css
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#eaf6ff,#cde8ff);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.login-card{
+    width:400px;
+    background:#ffffff;
+    border-radius:15px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.logo{
+    width:80px;
+    height:80px;
+    margin:auto;
+    background:#0d6efd;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+h1{
+    text-align:center;
+    color:#0d6efd;
+    margin-bottom:10px;
+    font-size:28px;
+}
+
+p{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    color:#333;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    transition:.3s;
+}
+
+.input-group input:focus{
+    border-color:#0d6efd;
+    outline:none;
+    box-shadow:0 0 8px rgba(13,110,253,.3);
+}
+
+.login-btn{
+    width:100%;
+    padding:15px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#0b5ed7;
+}
+
+.login-btn.guest-btn{
+    margin-top:12px;
+    background:#6c757d;
+}
+
+.login-btn.guest-btn:hover{
+    background:#5a6268;
+}
+
+.links{
+    text-align:center;
+    margin-top:25px;
+}
+
+.links a{
+    color:#0d6efd;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.links a:hover{
+    text-decoration:underline;
+}
+
+/* Mobile */
+
+@media (max-width:500px){
+    .login-card{
+        width:100%;
+        padding:30px 20px;
+    }
+
+    h1{
+        font-size:22px;
+    }
+
+    .logo{
+        width:70px;
+        height:70px;
+        font-size:34px;
+    }
+}
+
+/* ===========================
+   Dashboard
+=========================== */
+
+body{
+    background:#f4f7fb;
+    min-height:auto;
+    display:block;
+    justify-content:initial;
+    align-items:initial;
+}
+
+.navbar{
+    background:#0d6efd;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+}
+
+.logo-text{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.nav-links{
+    list-style:none;
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.nav-links a:hover{
+    color:#ffe082;
+}
+
+.dashboard{
+    padding:40px;
+}
+
+.card-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card h2{
+    margin-bottom:15px;
+    color:#0d6efd;
+}
+
+.card p{
+    margin-bottom:12px;
+    color:#444;
+}
+
+.card button{
+    margin-top:15px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.card button:hover{
+    background:#084298;
+}
+
+.ambulance-box{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    max-width:900px;
+    margin-top:30px;
+}
+
+.ambulance-box label{
+    display:block;
+    margin:18px 0 8px;
+    font-weight:600;
+    color:#333;
+}
+
+.ambulance-box input,
+.ambulance-box select,
+.ambulance-box textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d8e0;
+    border-radius:12px;
+    font-size:15px;
+    transition:.3s;
+}
+
+.ambulance-box textarea{
+    min-height:140px;
+    resize:vertical;
+}
+
+.ambulance-box button{
+    margin-top:22px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:14px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.ambulance-box button:hover{
+    background:#084298;
+}
+
+#appointmentStatus,
+#ambulanceStatus{
+    margin-top:20px;
+}
+
+@media (max-width:768px){
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .dashboard{
+        padding:20px;
+    }
+}

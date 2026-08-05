@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Book Appointment</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header class="navbar">
+
+<div class="logo-text">
+🏥 Hospital System
+</div>
+
+<ul class="nav-links">
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="appointments.html">Appointments</a></li>
+<li><a href="ambulance.html">Ambulance</a></li>
+<li><a href="index.html">Logout</a></li>
+</ul>
+
+</header>
+
+<div class="dashboard">
+
+<h1>📅 Book Appointment</h1>
+
+<div class="ambulance-box">
+
+<label>Full Name</label>
+<input type="text" placeholder="Enter your full name">
+
+<label>Select Department</label>
+
+<select>
+
+<option>General Medicine</option>
+<option>Cardiology</option>
+<option>Pediatrics</option>
+<option>Gynecology</option>
+<option>Orthopedics</option>
+<option>Dermatology</option>
+
+</select>
+
+<label>Select Doctor</label>
+
+<select>
+
+<option>Dr. Samuel</option>
+<option>Dr. Hana</option>
+<option>Dr. Daniel</option>
+<option>Dr. Ruth</option>
+
+</select>
+
+<label>Appointment Date</label>
+
+<input type="date">
+
+<label>Appointment Time</label>
+
+<input type="time">
+
+<label>Reason</label>
+
+<textarea rows="4"
+placeholder="Describe your health problem"></textarea>
+
+<button onclick="bookAppointment()">
+
+Book Appointment
+
+</button>
+
+<div id="appointmentStatus"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function bookAppointment(){
+
+document.getElementById("appointmentStatus").innerHTML=`
+
+<div style="background:#d1e7dd;
+padding:20px;
+margin-top:20px;
+border-radius:10px;">
+
+<h2 style="color:green;">
+✅ Appointment Booked
+</h2>
+
+<p><b>Doctor:</b> Dr. Samuel</p>
+
+<p><b>Date:</b> Tomorrow</p>
+
+<p><b>Time:</b> 10:30 AM</p>
+
+<p>Please arrive 15 minutes early.</p>
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>

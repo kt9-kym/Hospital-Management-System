@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+
+<header class="navbar">
+
+    <div class="logo-text">
+        🏥 Hospital System
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="ambulance.html">Ambulance</a></li>
+        <li><a href="appointments.html">Appointments</a></li>
+        <li><a href="payments.html">Payments</a></li>
+        <li><a href="notifications.html">Notifications</a></li>
+        <li><a href="index.html">Logout</a></li>
+    </ul>
+
+</header>
+
+
+<!-- Main -->
+
+<div class="dashboard">
+
+    <h1>Welcome 👋</h1>
+
+    <p id="userEmail"></p>
+
+    <div class="card-container">
+        <div class="card">
+
+<h2>📅 Book Appointment</h2>
+
+<p>Schedule a visit with a doctor.</p>
+
+<button onclick="window.location='appointments.html'">
+
+Book Now
+
+</button>
+
+</div>
+
+        <div class="card">
+            <h2>📅 Next Appointment</h2>
+
+            <p><strong>Doctor:</strong> Dr. Samuel</p>
+
+            <p><strong>Date:</strong> Tomorrow</p>
+
+            <p><strong>Time:</strong> 10:30 AM</p>
+
+            <button>View</button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>🚑 Emergency Ambulance</h2>
+
+            <p>Need immediate medical help?</p>
+
+            <button onclick="window.location='ambulance.html'">
+
+                Request Ambulance
+
+            </button>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h2>Check-up Reminder</h2>
+
+            <p>Your annual health check-up</p>
+
+            <p><strong>In 3 Days</strong></p>
+
+            <button onclick="window.location='notifications.html'">
+
+              View Notifications
+
+            </button>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h2>💳 Outstanding Bill</h2>
+
+            <h1>650 ETB</h1>
+
+            <button onclick="window.location='payments.html'">
+
+             Pay Now
+
+             </button>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h2>🔔 Notifications</h2>
+
+               <p>3 New Notifications</p>
+
+             <button onclick="window.location='notifications.html'">
+
+               Open Notifications
+
+             </button>
+
+            <ul>
+
+                <li>Appointment Approved</li>
+
+                <li>Lab Result Ready</li>
+
+                <li>Payment Received</li>
+
+            </ul>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h2>📋 Medical Records</h2>
+
+            <p>View prescriptions, diagnosis and reports.</p>
+
+            <button>Open Records</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+const email = localStorage.getItem("patientEmail");
+
+if(email){
+
+document.getElementById("userEmail").innerHTML="Logged in as: <b>"+email+"</b>";
+
+}
+
+</script>
+
+</body>
+</html>
