@@ -1,148 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payments</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
+<body data-title-key="titlePayments">
 <header class="navbar">
-
-<div class="logo-text">
-🏥 Hospital System
-</div>
-
-<ul class="nav-links">
-<li><a href="dashboard.html">Dashboard</a></li>
-<li><a href="appointments.html">Appointments</a></li>
-<li><a href="ambulance.html">Ambulance</a></li>
-<li><a href="medical.html">Medical Records</a></li>
-<li><a href="payments.html">Payments</a></li>
-<li><a href="index.html">Logout</a></li>
-</ul>
-
+    <div class="logo-text"><span data-key="brand">🏥 Hospital System</span></div>
+    <ul class="nav-links">
+        <li><a href="dashboard%20(1).html" data-key="dashboard">Dashboard</a></li>
+        <li><a href="appointments.html" data-key="appointments">Appointments</a></li>
+        <li><a href="ambulance.html" data-key="ambulance">Ambulance</a></li>
+        <li><a href="medical.html" data-key="medicalRecords">Medical Records</a></li>
+        <li><a href="payments.html" data-key="payments">Payments</a></li>
+        <li><a href="index.html" data-key="logout" data-logout>Logout</a></li>
+    </ul>
+    <button type="button" class="language-switch" data-language-switch onclick="toggleLanguage()">አማርኛ</button>
 </header>
 
-<div class="dashboard">
+<main class="dashboard">
+    <h1 data-key="billsPayments">💳 Bills & Payments</h1>
+    <p data-key="paymentDemoNote">Demo only. No real payment is processed.</p>
+    <div class="card-container">
+        <section class="card">
+            <h2 data-key="outstandingBill">Demo balance</h2>
+            <h1>650 ETB</h1>
+            <p data-key="consultationFee">Demo balance (not a real bill)</p>
+            <button type="button" id="demoPaymentButton" data-key="payNow">Record Demo Payment</button>
+            <p id="paymentResult" role="status" aria-live="polite"></p>
+        </section>
+        <section class="card">
+            <h2 data-key="paymentHistory">Demo Payment History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-key="paymentDate">Date</th>
+                        <th data-key="amount">Amount</th>
+                        <th data-key="status">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="paymentRows"></tbody>
+            </table>
+            <p id="emptyPayments" data-key="noPayments">No demo payments have been recorded.</p>
+        </section>
+    </div>
+</main>
 
-<h1>💳 Bills & Payments</h1>
-
-<div class="card-container">
-
-<div class="card">
-
-<h2>Outstanding Bill</h2>
-
-<h1 style="color:red;">650 ETB</h1>
-
-<p>Consultation Fee</p>
-
-<button onclick="payNow()">
-
-Pay Now
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>Payment History</h2>
-
-<table style="width:100%;border-collapse:collapse;">
-
-<tr>
-<th>Date</th>
-<th>Amount</th>
-<th>Status</th>
-</tr>
-
-<tr>
-<td>01 Aug</td>
-<td>300 ETB</td>
-<td style="color:green;">Paid</td>
-</tr>
-
-<tr>
-<td>15 Jul</td>
-<td>500 ETB</td>
-<td style="color:green;">Paid</td>
-</tr>
-
-</table>
-
-</div>
-
-<div class="card">
-
-<h2>Payment Methods</h2>
-
-<p>✅ Cash</p>
-
-<p>✅ Telebirr</p>
-
-<p>✅ Bank Transfer</p>
-
-<p>✅ Credit Card</p>
-
-</div>
-
-<div class="card">
-
-<h2>Receipt</h2>
-
-<p>Your latest receipt is available.</p>
-
-<button onclick="downloadReceipt()">
-
-Download Receipt
-
-</button>
-
-</div>
-
-</div>
-
-<div id="paymentResult"></div>
-
-</div>
-
+<script src="api.js"></script>
+<script src="script.js"></script>
+<script src="translations.js"></script>
 <script>
+    const paymentRows = document.getElementById("paymentRows");
+    const paymentResult = document.getElementById("paymentResult");
 
-function payNow(){
+    function renderPayments(payments) {
+        paymentRows.replaceChildren();
+        document.getElementById("emptyPayments").hidden = payments.length > 0;
+        payments.forEach(payment => {
+            const row = document.createElement("tr");
+            const date = document.createElement("td");
+            date.textContent = new Date(payment.created_at).toLocaleDateString();
+            const amount = document.createElement("td");
+            amount.textContent = `${(payment.amount_cents / 100).toFixed(2)} ${payment.currency}`;
+            const status = document.createElement("td");
+            status.textContent = payment.status === "simulated"
+                ? translations[currentLang].simulated
+                : payment.status;
+            row.append(date, amount, status);
+            paymentRows.append(row);
+        });
+    }
 
-document.getElementById("paymentResult").innerHTML=`
+    async function loadPayments() {
+        try {
+            const result = await window.apiRequest("/api/payments");
+            renderPayments(result.payments);
+        } catch (error) {
+            if (error.status === 401) {
+                window.location.replace("index.html");
+                return;
+            }
+            paymentResult.textContent = error.message;
+            console.error("Could not load payment history:", error);
+        }
+    }
 
-<div style="margin-top:30px;
-background:#d1e7dd;
-padding:20px;
-border-radius:10px;">
+    document.getElementById("demoPaymentButton").addEventListener("click", async event => {
+        const button = event.currentTarget;
+        button.disabled = true;
+        paymentResult.textContent = "";
+        try {
+            await window.apiRequest("/api/payments/demo", { method: "POST", body: "{}" });
+            paymentResult.textContent = translations[currentLang].paymentRecorded;
+            await loadPayments();
+        } catch (error) {
+            if (error.status === 401) {
+                window.location.replace("index.html");
+                return;
+            }
+            paymentResult.textContent = error.message;
+            console.error("Could not record demo payment:", error);
+        } finally {
+            button.disabled = false;
+        }
+    });
 
-<h2 style="color:green;">
-✅ Payment Successful
-</h2>
-
-<p>Amount Paid: <b>650 ETB</b></p>
-
-<p>Reference: HMS2026001</p>
-
-</div>
-
-`;
-
-}
-
-function downloadReceipt(){
-
-alert("Receipt downloaded successfully! (Demo)");
-
-}
-
+    loadPayments();
 </script>
-
 </body>
 </html>
